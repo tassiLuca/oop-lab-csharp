@@ -33,33 +33,45 @@ namespace Properties
         {
         }
 
-        // TODO improve
-        public string GetSeed()
-        {
-            return this.seed;
-        }
+        /// <summary>
+        /// Gets the card's seed.
+        /// </summary>
+        public string Seed => this.seed;
 
-        // TODO improve
-        public string GetName()
-        {
-            return this.name;
-        }
+        /// <summary>
+        /// Gets the card name.
+        /// </summary>
+        public string Name => this.name;
 
-        // TODO improve
-        public int GetOrdinal()
-        {
-            return this.ordinal;
-        }
+        /// <summary>
+        /// Gets the card ordinal.
+        /// </summary>
+        public int Ordinal => this.ordinal;
 
         /// <inheritdoc cref="object.ToString"/>
         public override string ToString()
         {
             // TODO understand string interpolation
-            return $"{this.GetType().Name}(Name={this.GetName()}, Seed={this.GetSeed()}, Ordinal={this.GetOrdinal()})";
+            return $"{this.GetType().Name}(Name={this.Name}, Seed={this.Seed}, Ordinal={this.Ordinal})";
         }
 
-        // TODO generate Equals(object obj)
+        private bool Equals(Card other)
+        {
+            return seed == other.seed && name == other.name && ordinal == other.ordinal;
+        }
 
-        // TODO generate GetHashCode()
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Card) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(seed, name, ordinal);
+        }
+
     }
 }
