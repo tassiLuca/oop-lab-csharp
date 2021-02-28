@@ -29,7 +29,6 @@ namespace Properties
 
         public int DeckSize => this.names.Length * this.seeds.Length;
 
-        /// TODO improve
         public ISet<Card> GetDeck()
         {
             if (this.names == null || this.seeds == null)
